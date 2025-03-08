@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/png" href="logo.jpg" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+    <title>Japanese Cards</title>
+    <style>
+      /* BODY - Background Inspired by Dragon Ball */
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-size: cover;
+        font-family: "Arial", sans-serif;
+        background-image: radial-gradient(
+          circle,
+          #ff9900,
+          #ff6600,
+          #ff3300
+        ); /* Saiyan Energy */
+        overflow: hidden;
+        margin: 0;
+        position: relative;
+        flex-direction: column;
+      }
+
+      /* TRANSPARENT HEADER */
+      header {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.2); /* Transparent black */
+        text-align: center;
+        padding: 20px 0;
+        box-shadow: 0 4px 10px rgba(255, 69, 0, 0.8);
+        backdrop-filter: blur(5px); /* Blur effect para readable */
+      }
+
+      /* HEADER TEXT - DRAGON BALL STYLE */
+      header h1 {
+        font-size: 3.5em;
+        font-family: "Saiyan Sans", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #ffd700; /* Dragon Ball Gold */
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.9),
+          0 0 30px rgba(255, 165, 0, 1);
+        animation: glowing-text 1.5s infinite alternate;
+        margin: 0;
+      }
+
+      /* Glowing Text Effect */
+      @keyframes glowing-text {
+        0% {
+          text-shadow: 0 0 10px #ffd700, 0 0 20px #ffcc00;
+        }
+        100% {
+          text-shadow: 0 0 20px #ffcc00, 0 0 40px #ff9900;
+        }
+      }
+
+      /* DRAGON BALL THEMED BUTTON */
+      button {
+        border: 3px solid #ffcc00;
+        border-radius: 50px;
+        padding: 15px 25px;
+        background: linear-gradient(to right, #ff9900, #ff6600);
+        color: #fff;
+        font-size: 22px;
+        font-weight: bold;
+        font-family: "Saiyan Sans", sans-serif;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 0 20px rgba(255, 140, 0, 0.8),
+          0 0 40px rgba(255, 69, 0, 0.6);
+        position: absolute;
+        top: 70%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      /* BUTTON HOVER EFFECT */
+      button:hover {
+        background: linear-gradient(to right, #ff6600, #ff3300);
+        box-shadow: 0 0 30px rgba(255, 69, 0, 1), 0 0 60px rgba(255, 140, 0, 1);
+        transform: scale(1.1);
+      }
+
+      /* BUTTON ACTIVE EFFECT */
+      button:active {
+        transform: scale(1);
+      }
+
+      /* FULLSCREEN BACKGROUND GIF */
+      .bg-gif {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("DB1.gif") no-repeat center center;
+        background-size: cover;
+        z-index: -1;
+        opacity: 1;
+      }
+
+      .gif-img {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+        display: block;
+        margin: 20px auto;
+        border-radius: 20px;
+        image-rendering: auto;
+      }
+
+      /* OPENING TEXT - Centered & Animated */
+      .opening-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 3.2em;
+        color: #fff; /* White para malinaw sa background */
+        text-transform: uppercase;
+        text-shadow: 0 0 20px rgba(255, 255, 255, 1),
+          0 0 40px rgba(255, 165, 0, 1), 0 0 60px rgba(255, 69, 0, 1);
+        animation: fadeIn 3s ease-in-out, glow 1.5s infinite alternate;
+        font-family: "Saiyan Sans", sans-serif;
+        text-align: center;
+        width: 100%;
+      }
+
+      /* Fade-in Effect */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -60%);
+        }
+        100% {
+          opacity: 1;
+          transform: translate(-50%, -50%);
+        }
+      }
+
+      /* Glowing Effect */
+      @keyframes glow {
+        0% {
+          text-shadow: 0 0 10px #ffd700, 0 0 20px #ffcc00;
+        }
+        100% {
+          text-shadow: 0 0 20px #ffcc00, 0 0 40px #ff9900;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- HEADER -->
+    <div class="bg-gif"></div>
+
+    <!-- TRANSPARENT HEADER -->
+    <header>
+      <h1>Anime World Awaits</h1>
+    </header>
+    <img src="DB1.gif" alt="Dragon Ball GIF" class="gif-img" />
+
+    <!-- OPENING TEXT (CENTERED) -->
+    <div class="opening-text">Welcome to the Dragon Ball Universe!</div>
+
+    <!-- DRAGON BALL THEMED BUTTON -->
+    <button id="moveButton" onclick="window.location.href='ifgetsclick.html'">
+      CLICK ME!!
+    </button>
+
+    <script>
+      const button = document.getElementById("moveButton");
+      
+      const positions = [
+        { x: "30%", y: "30%" },
+        { x: "70%", y: "30%" },
+        { x: "70%", y: "70%" },
+        { x: "30%", y: "70%" },
+      ];
+
+      let currentPositionIndex = 0;
+      let isHoveringFast = false;
+
+      // Initial Position
+      button.style.left = "50%";
+      button.style.top = "50%";
+      button.style.transform = "translate(-50%, -50%)";
+
+      // Detect mouse hover
+      button.addEventListener("mouseover", function () {
+        isHoveringFast = true;
+
+        setTimeout(() => {
+          if (isHoveringFast) {
+            currentPositionIndex =
+              (currentPositionIndex + 1) % positions.length;
+            button.style.left = positions[currentPositionIndex].x;
+            button.style.top = positions[currentPositionIndex].y;
+            button.style.transform = "translate(-50%, -50%)"; // Keep centered
+          }
+        }, 100);
+      });
+
+      button.addEventListener("mouseout", function () {
+        isHoveringFast = false;
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/png" href="logo.jpg" />
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <title>Cards Collections</title>
+
+    <!-- Basket/container CSS -->
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        padding-top: 60px;
+        /* Adds space at the top to account for the fixed header */
+      }
+
+      /* Header - Anime Themed */
+      header {
+        background-image: linear-gradient(
+          to right,
+          #ff9900,
+          #ff6600,
+          #ff3300
+        ); /* Fiery anime gradient */
+        color: white;
+        padding: 0px 0;
+        text-align: center;
+        border-radius: 4px;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(255, 69, 0, 0.8);
+        animation: anime-glow 2s infinite alternate;
+      }
+
+      /* Anime Glow Animation */
+      @keyframes anime-glow {
+        0% {
+          box-shadow: 0 0 10px rgba(255, 165, 0, 0.6);
+        }
+        100% {
+          box-shadow: 0 0 20px rgba(255, 69, 0, 0.9);
+        }
+      }
+
+      /* Header Text - Glowing and Animated */
+      header h1 {
+        font-size: 28px;
+        font-weight: bold;
+        font-family: "Press Start 2P", cursive; /* Anime-style pixel font */
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.9),
+          0 0 20px rgba(255, 140, 0, 0.8);
+        background: linear-gradient(to right, #ffffff, #ffeb3b, #ff9800);
+        -webkit-background-clip: text;
+        color: transparent;
+        animation: glowing-text 1.5s infinite alternate;
+      }
+
+      /* Glowing Text Effect */
+      @keyframes glowing-text {
+        0% {
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+        }
+        100% {
+          text-shadow: 0 0 20px rgba(255, 140, 0, 0.9);
+        }
+      }
+
+      /* Header Hover Effect (Cool Vibe) */
+      header:hover {
+        background-image: linear-gradient(to right, #ff3300, #ff6600, #ff9900);
+        transition: background 0.5s ease-in-out;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        /* Default to 4 columns */
+        gap: 20px;
+        padding: 20px;
+        justify-items: center;
+      }
+
+      .card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        width: 100%;
+        max-width: 380px;
+        text-align: center;
+        padding: 10px;
+      }
+
+      .card img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+      }
+
+      /* Anime-style for h3 */
+      .card h3 {
+        font-size: 22px;
+        font-weight: bold;
+        color: #ff6600;
+        text-transform: uppercase;
+        background: linear-gradient(to right, #ff9900, #ff6600);
+        -webkit-background-clip: text;
+        color: transparent;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+        letter-spacing: 1px;
+        padding: 4px 8px;
+        border-radius: 8px;
+        display: inline-block;
+      }
+
+      /* Anime-style for p */
+      .card p {
+        font-size: 16px;
+        font-weight: 500;
+        color: #ff6699;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        line-height: 1.5;
+        margin-bottom: 10px;
+        text-align: center;
+        transition: color 0.3s ease;
+      }
+
+      .card p:hover {
+        color: #ff0066;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      }
+
+      .card .price {
+        font-size: 24px;
+        font-weight: bold;
+        color: #ff6600;
+        background: linear-gradient(to right, #ff9900, #ff6600);
+        -webkit-background-clip: text;
+        color: transparent;
+        text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+        letter-spacing: 1px;
+        padding: 4px 8px;
+        border-radius: 6px;
+        display: inline-block;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+
+      .card button {
+        background-image: linear-gradient(to right, #ff9900, #ff6600);
+        color: #fff;
+        border: none;
+        padding: 10px;
+        width: 100%;
+        margin-top: 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      .card button:hover {
+        background-image: linear-gradient(to right, #ff6600, #ff9900);
+      }
+
+      /* Basket Icon Styles */
+      .basket {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 25px;
+        color: #fff;
+        background: linear-gradient(
+          135deg,
+          #ff6600,
+          #ff3300
+        ); /* Gradient background */
+        padding: 15px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 0 10px rgba(255, 140, 0, 0.8),
+          0 0 20px rgba(255, 69, 0, 0.6); /* Anime Glow */
+        transition: transform 0.2s ease-in-out;
+      }
+
+      /* Hover Effect */
+      .basket:hover {
+        transform: scale(1.1);
+        box-shadow: 0 0 15px rgba(255, 69, 0, 1),
+          0 0 30px rgba(255, 100, 0, 0.8);
+      }
+
+      .basket .count {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: #fff;
+        color: #ff6600;
+        padding: 5px 10px;
+        border-radius: 50%;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      /* Basket Popup Styles */
+      .basket-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 40px;
+        border-radius: 8px;
+        z-index: 1000;
+        width: 1000px;
+        max-height: 80%;
+        overflow-y: auto;
+      }
+
+      .basket-popup h3 {
+        margin-top: 0;
+        text-align: center;
+        font-size: 28px;
+        font-family: "Press Start 2P", cursive;
+        color: #ff6600;
+        background: linear-gradient(to right, #ff9900, #ff6600);
+        /* Gradient background */
+        -webkit-background-clip: text;
+        color: transparent;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        letter-spacing: 2px;
+      }
+
+      .basket-popup ul {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      /* Adjust the product image size in the basket */
+      .basket-popup ul li img {
+        width: 500px;
+        height: auto;
+        max-width: 200px;
+        border-radius: 4px;
+      }
+
+      /* Adjust the card style in the basket to avoid tightness */
+      .basket-popup ul li {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #f9f9f9;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 100%;
+      }
+
+      .basket-popup ul li h3 {
+        font-size: 14px;
+        margin: 5px 0;
+      }
+
+      .basket-popup ul li .price {
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+
+      .basket-popup ul li button {
+        font-size: 12px;
+        padding: 6px;
+        margin-top: 5px;
+      }
+
+      /* Close button for the basket */
+      .basket-popup .close {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        background: none;
+        color: #ff6600;
+        font-size: 24px;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+        text-shadow: none;
+      }
+
+      .basket-popup .close:hover {
+        color: #ff9900;
+      }
+
+      /* Blur effect for background content */
+      .blurred-background {
+        filter: blur(5px);
+        pointer-events: none;
+        /* Prevent interactions with the background */
+      }
+
+      /* Ensure the basket popup and header are not blurred */
+      #basket-popup,
+      header {
+        filter: none;
+        /* Do not apply the blur to the basket popup or header */
+      }
+
+      /* Style for the checkbox */
+      .basket-popup ul li .checkbox-container {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+
+      .basket-popup ul li input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+      }
+
+      /* Basket Popup Button Styles */
+      .basket-actions button {
+        background-image: linear-gradient(to right, #ff9900, #ff6600);
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        width: 100%;
+        margin-top: 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: background-image 0.3s ease;
+        letter-spacing: 1px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .basket-actions button:hover {
+        background-image: linear-gradient(to right, #ff6600, #ff9900);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      .basket-actions button:focus {
+        outline: none;
+      }
+
+      .basket-actions button:active {
+        transform: scale(0.98);
+      }
+
+      /* Hover effect for Remove Selected button */
+      .basket-actions .remove-selected:hover {
+        background-image: linear-gradient(to right, #ff0000, #ff4d4d);
+        /* Red gradient for Remove Selected */
+      }
+
+      /* Hover effect for Proceed to Checkout button */
+      .basket-actions .checkout:hover {
+        background-image: linear-gradient(to right, #008000, #00b300);
+        /* Green gradient for Checkout */
+      }
+
+      /* Add shadow effect when hovered over */
+      .remove-selected:hover,
+      .checkout:hover {
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+      }
+
+      .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 5px;
+      }
+
+      .quantity-controls button {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+      }
+
+      .quantity-controls button:hover {
+        background-color: #ddd;
+      }
+
+      .quantity-controls span {
+        font-weight: bold;
+        font-size: 16px;
+        min-width: 20px;
+        text-align: center;
+      }
+
+      .remove-button {
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .remove-button:hover {
+        background-color: #cc0000;
+      }
+
+      .cart-item-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+      }
+
+      /* Checkout Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1001;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 1000px;
+        background: linear-gradient(to right, #ff9900, #ff6600);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      .modal-content {
+        position: relative;
+        background: linear-gradient(to right, #ff6600, #ff9900);
+        padding: 20px;
+        border-radius: 10px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        background: none;
+        color: white;
+        border: none;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .close-btn:hover {
+        color: #ff6600;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      }
+
+      .checkout-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
+        font-size: 16px;
+        background: linear-gradient(to right, #ff6600, #ff9900);
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .total-price {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 10px;
+        background: linear-gradient(to right, #ff6600, #ff9900);
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .confirm-checkout {
+        background: #28a745;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+
+      .confirm-checkout:hover {
+        background: #218838;
+      }
+
+      @media (max-width: 1024px) {
+        .container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .card h3 {
+          font-size: 16px;
+        }
+
+        .card p {
+          font-size: 14px;
+        }
+
+        .card .price {
+          font-size: 16px;
+        }
+
+        .card button {
+          font-size: 14px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+
+        .card h3 {
+          font-size: 14px;
+        }
+
+        .card p {
+          font-size: 12px;
+        }
+
+        .card .price {
+          font-size: 14px;
+        }
+
+        .card button {
+          font-size: 12px;
+        }
+      }
+    </style>
+
+    <!-- Pagination CSS -->
+    <style>
+      #pagination-controls {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .pagination-button {
+        padding: 10px 15px;
+        margin: 5px;
+        border: none;
+        background-color: #ff9900;
+        color: white;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease-in-out;
+      }
+
+      .pagination-button:hover {
+        background-color: #ff6600;
+      }
+
+      .pagination-button:active {
+        transform: scale(0.95);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <h1>Japanese Cards Collections</h1>
+
+      <div class="basket" id="basket" onclick="toggleBasket()">
+        🛒
+        <span id="cart-count" class="count">0</span>
+      </div>
+
+      <div class="search-icon" id="searchIcon">🔍</div>
+      <div class="search-box" id="searchBox">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search..."
+          onkeyup="filterProducts()"
+        />
+      </div>
+
+      <style>
+        /* Search Box - Anime-Themed */
+        .search-box {
+          position: absolute;
+          top: 50%;
+          right: 60px;
+          transform: translateX(105%) translateY(-50%);
+          background: rgba(255, 255, 255, 0.9); /* Slight transparency */
+          padding: 10px;
+          border-radius: 10px;
+          width: 180px;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          opacity: 0;
+          transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+          box-shadow: 0 0 10px rgba(255, 165, 0, 0.6),
+            0 0 20px rgba(255, 100, 0, 0.4); /* Glowing effect */
+          border: 2px solid transparent;
+          background-clip: padding-box, border-box;
+          background-origin: padding-box, border-box;
+          animation: neon-glow 1.5s infinite alternate;
+        }
+
+        /* Anime Glow Effect */
+        @keyframes neon-glow {
+          0% {
+            box-shadow: 0 0 8px rgba(255, 140, 0, 0.5);
+          }
+          100% {
+            box-shadow: 0 0 15px rgba(255, 69, 0, 0.8);
+          }
+        }
+
+        /* When Active, Slide Left but Stay Close */
+        .search-box.active {
+          opacity: 1;
+          transform: translateX(-25%) translateY(-50%);
+        }
+
+        /* Search Input - Futuristic Anime UI */
+        .search-box input {
+          width: 100%;
+          padding: 8px;
+          font-size: 14px;
+          border: none;
+          border-radius: 6px;
+          outline: none;
+          background: #ffcc80; /* Soft orange for warm anime feel */
+          color: #333;
+          font-weight: bold;
+          text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+          transition: 0.3s ease-in-out;
+        }
+
+        /* Input Focus Animation */
+        .search-box input:focus {
+          background: #fff4e0;
+          box-shadow: 0 0 12px rgba(255, 69, 0, 0.8);
+        }
+
+        /* Animated Placeholder Text */
+        .search-box input::placeholder {
+          color: rgba(255, 69, 0, 0.7);
+          font-style: italic;
+          font-weight: bold;
+        }
+
+        /* Search Icon - Glowing Effect */
+        .search-icon {
+          position: absolute;
+          top: 15px;
+          right: 60px;
+          font-size: 22px;
+          color: white;
+          cursor: pointer;
+          background-color: transparent;
+          padding: 10px;
+          border-radius: 50%;
+          z-index: 1000;
+          transition: transform 0.2s ease-in-out;
+        }
+
+        .search-icon:hover {
+          transform: scale(1.2);
+          text-shadow: 0 0 8px rgba(255, 140, 0, 0.9);
+        }
+      </style>
+    </header>
+
+    <!-- CATEGORY -->
+
+    <h2 id="page-title" style="text-align: center; margin-top: 20px; font-size: 24px; color: #ff6600;">
+        Dragon Ball Cards
+      </h2>
+      
+<!-- DRAGON BALL CARDS -->
+    <div class="container">
+      <div class="card">
+        <img src="1.webp" alt="Product 1" />
+        <h3>Son Goku UGM5-CP5</h3>
+        <p>Japanese Super Dragon Ball Heroes Cards .</p>
+        <div class="price">¥ 1,180 JPY</div>
+        <button
+          id="btn-product-1"
+          onclick="addToCart('Son Goku UGM5-CP5', '1.webp', '₱999', 1)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="2.jpeg" alt="Product 2" />
+        <h3>Super Buu UGM6-CP6</h3>
+        <p>Japanese Super Dragon Ball Heroes Cards .</p>
+        <div class="price">¥ 2,900 JPY</div>
+        <button
+          id="btn-product-2"
+          onclick="addToCart('Super Buu UGM6-CP6', '2.jpeg', '₱1,599', 2)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="3.jpg" alt="Product 3" />
+        <h3>Broly: BR PUMS10-16</h3>
+        <p>Japanese Super Dragon Ball Heroes Cards .</p>
+        <div class="price">¥ 800 JPY</div>
+        <button
+          id="btn-product-3"
+          onclick="addToCart('Broly: BR PUMS10-16', '3.jpg', '₱2,999', 3)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="4.webp" alt="Product 4" />
+        <h3>Vegeta MM1-059</h3>
+        <p>Japanese Super Dragon Ball Heroes Cards .</p>
+        <div class="price">¥ 580 JPY</div>
+        <button
+          id="btn-product-4"
+          onclick="addToCart('Vegeta MM1-059', '4.webp', '₱3,999', 4)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="5.webp" alt="Product 5" />
+        <h3>Beerus PUMS13-22</h3>
+        <p>Japanese Super Dragon Ball Heroes Cards .</p>
+        <div class="price">¥ 15,000 JPY</div>
+        <button
+          id="btn-product-5"
+          onclick="addToCart('Beerus PUMS13-22', '5.webp', '₱9,999,999', 5)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="6.webp" alt="Product 6" />
+        <h3>Son Goku MM3-CP11</h3>
+        <p>Japanese Super Dragon Ball Heroes Cards .</p>
+        <div class="price">¥ 7,777 JPY</div>
+        <button
+          id="btn-product-6"
+          onclick="addToCart('Son Goku MM3-CP11', '6.webp', '₱6,999', 6)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="7.webp" alt="Product 7" />
+        <h3>Son Goku PBBS9-04</h3>
+        <p>Japanese Super Dragon Ball Heroes Cards .</p>
+        <div class="price">¥ 7,700 JPY</div>
+        <button
+          id="btn-product-7"
+          onclick="addToCart('Son Goku PBBS9-04', '7.webp', '₱7,999', 7)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="8.webp" alt="Product 8" />
+        <h3>Champa PCS11-09</h3>
+        <p>Japanese Super Dragon Ball Heroes Cards .</p>
+        <div class="price">¥ 12,580 JPY</div>
+        <button
+          id="btn-product-8"
+          onclick="addToCart('Champa PCS11-09', '8.webp', '₱999,999', 8)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <!-- ONEPIECE CARDS -->
+
+      <div class="card">
+        <img src="o1.webp" alt="Product 8" />
+        <h3>Monkey.D.Garp ST08-010 - side Luffy deck</h3>
+        <p>Japanese One Piece Cards .</p>
+        <div class="price">¥ 12,180 JPY</div>
+        <button
+          id="btn-product-8"
+          onclick="addToCart('Champa PCS11-09', '8.webp', '₱999,999', 8)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="o2.webp" alt="Product 8" />
+        <h3>Gol.D.Roger OP09-118 The New Emperor [OP-09]</h3>
+        <p>Japanese One Piece Cards .</p>
+        <div class="price">¥ 10,000 JPY</div>
+        <button
+          id="btn-product-8"
+          onclick="addToCart('Champa PCS11-09', '8.webp', '₱999,999', 8)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="o3.webp" alt="Product 8" />
+        <h3>Boa Hancock P-066 - Promo</h3>
+        <p>Japanese One Piece Cards .</p>
+        <div class="price">¥ 1,300 JPY</div>
+        <button
+          id="btn-product-8"
+          onclick="addToCart('Champa PCS11-09', '8.webp', '₱999,999', 8)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="o4.webp" alt="Product 8" />
+        <h3>Monkey D. Luffy P-041 - 7-Eleven Promo</h3>
+        <p>Japanese One Piece Cards .</p>
+        <div class="price">¥ 5,500 JPY</div>
+        <button
+          id="btn-product-8"
+          onclick="addToCart('Champa PCS11-09', '8.webp', '₱999,999', 8)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="o5.webp" alt="Product 8" />
+        <h3>Portgas D. Ace ST13-002 L - One Piece 7-Eleven Promo</h3>
+        <p>Japanese One Piece Cards .</p>
+        <div class="price">¥ 3,800 JPY</div>
+        <button
+          id="btn-product-8"
+          onclick="addToCart('Champa PCS11-09', '8.webp', '₱999,999', 8)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="o6.webp" alt="Product 8" />
+        <h3>Sabo ST13-001 L - One Piece 7-Eleven Promo</h3>
+        <p>Japanese One Piece Cards .</p>
+        <div class="price">¥ 3,400 JPY</div>
+        <button
+          id="btn-product-8"
+          onclick="addToCart('Champa PCS11-09', '8.webp', '₱999,999', 8)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="o7.webp" alt="Product 8" />
+        <h3>Roronoa Zoro P-045 - Promo</h3>
+        <p>Japanese One Piece Cards .</p>
+        <div class="price">¥ 1,200 JPY</div>
+        <button
+          id="btn-product-8"
+          onclick="addToCart('Champa PCS11-09', '8.webp', '₱999,999', 8)"
+        >
+          Add to Cart
+        </button>
+      </div>
+
+      <div class="card">
+        <img src="o8.webp" alt="Product 8" />
+        <h3>Kaido OP04-044 SR Parallel - Kingdoms of Intrigue</h3>
+        <p>Japanese One Piece Cards .</p>
+        <div class="price">¥ 2,500 JPY</div>
+        <button
+          id="btn-product-8"
+          onclick="addToCart('Champa PCS11-09', '8.webp', '₱999,999', 8)"
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+
+    <div id="pagination-controls"></div>
+
+    <!-- Basket Popup -->
+    <div class="basket-popup" id="basket-popup">
+      <button class="close" onclick="closeBasket()">X</button>
+      <h3>Your Basket</h3>
+      <ul id="basket-items">
+        <!-- Items will be displayed here -->
+      </ul>
+      <!-- Buttons for actions -->
+      <div class="basket-actions">
+        <button class="remove-selected" onclick="removeSelectedItems()">
+          Remove Selected
+        </button>
+        <button class="checkout" onclick="openCheckoutModal()">
+          Proceed to Checkout
+        </button>
+      </div>
+    </div>
+
+    <!-- Basket/Checkout Modal -->
+    <div id="checkout-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h2>Checkout</h2>
+        <div id="checkout-items-list">
+          <!-- Product details will be injected here dynamically -->
+        </div>
+        <div class="total-price">
+          <h3>Total Price: <span id="total-price">₱0</span></h3>
+        </div>
+        <button class="confirm-checkout" onclick="confirmCheckout()">
+          Confirm Checkout
+        </button>
+      </div>
+    </div>
+    <!-- Basket/JS  -->
+    <script>
+      let cartCount = 0;
+      let cartItems = [];
+      let addedItems = new Set();
+
+      // Function to add item to cart
+      function addToCart(name, image, price, productId) {
+        if (addedItems.has(name)) {
+          alert("This item is already added to the cart.");
+          return;
+        }
+
+        // Add to cart logic
+        cartCount++;
+        cartItems.push({ name, image, price, productId });
+        addedItems.add(name); // Mark this item as added
+        document.getElementById("cart-count").textContent = cartCount;
+
+        // Disable the button and change the text
+        const button = document.getElementById(`btn-product-${productId}`);
+        button.disabled = true;
+        button.textContent = "Already added to cart"; // Change button text
+      }
+
+      // Function to toggle basket visibility
+      function toggleBasket() {
+        const basketPopup = document.getElementById("basket-popup");
+        const basketItemsList = document.getElementById("basket-items");
+        const container = document.querySelector(".container");
+
+        if (
+          basketPopup.style.display === "none" ||
+          basketPopup.style.display === ""
+        ) {
+          basketPopup.style.display = "block";
+          container.classList.add("blurred-background");
+          basketItemsList.innerHTML = "";
+
+          cartItems.forEach((item) => {
+            const li = document.createElement("li");
+            li.style.position = "relative"; // Ensuring the checkbox is positioned correctly
+            li.innerHTML = `
+        <div class="card">
+          <img src="${item.image}" alt="${item.name}">
+          <h3>${item.name}</h3>
+          <div class="price">${item.price}</div>
+
+          <div class="quantity-controls">
+            <button onclick="changeQuantity(${item.productId}, -1)">➖</button>
+            <span id="quantity-${item.productId}">${item.quantity || 1}</span>
+            <button onclick="changeQuantity(${item.productId}, 1)">➕</button>
+          </div>
+
+          <button onclick="removeFromCart('${item.name}')">Remove</button>
+          <div class="checkbox-container">
+            <input type="checkbox" id="checkbox-${
+              item.productId
+            }" onclick="toggleSelection('${item.productId}')">
+          </div>
+        </div>`;
+            basketItemsList.appendChild(li);
+          });
+        } else {
+          basketPopup.style.display = "none";
+          container.classList.remove("blurred-background");
+        }
+      }
+
+      function changeQuantity(productId, change) {
+        let item = cartItems.find((item) => item.productId === productId);
+
+        if (item) {
+          // Ensure minimum quantity is 1
+          item.quantity = (item.quantity || 1) + change;
+          if (item.quantity < 1) item.quantity = 1;
+
+          // Update the quantity display in the basket
+          document.getElementById(`quantity-${productId}`).textContent =
+            item.quantity;
+
+          // Recalculate the total price when quantity changes
+          updateTotalPrice();
+        }
+      }
+
+      // Function to toggle the selection state of an item
+      function toggleSelection(productId) {
+        const checkbox = document.getElementById(`checkbox-${productId}`);
+        const isChecked = checkbox.checked;
+
+        // If item is selected, you could handle it differently if needed
+        if (isChecked) {
+          console.log(`Product ID ${productId} selected`);
+        } else {
+          console.log(`Product ID ${productId} deselected`);
+        }
+      }
+
+      // Function to remove selected items from the cart
+      function removeSelectedItems() {
+        const basketItemsList = document.getElementById("basket-items");
+        const selectedItems = [];
+
+        // Find all checked checkboxes
+        basketItemsList
+          .querySelectorAll('input[type="checkbox"]:checked')
+          .forEach((checkbox) => {
+            const productId = checkbox.id.replace("checkbox-", ""); // Extract the productId
+            selectedItems.push(productId);
+          });
+
+        if (selectedItems.length > 0) {
+          selectedItems.forEach((productId) => {
+            // Find the item in the cart
+            const removedItem = cartItems.find(
+              (item) => item.productId.toString() === productId
+            );
+
+            // Remove item from cartItems array
+            cartItems = cartItems.filter(
+              (item) => item.productId.toString() !== productId
+            );
+            cartCount = cartItems.length;
+            document.getElementById("cart-count").textContent = cartCount;
+
+            // Also remove the item from the addedItems set
+            addedItems.delete(removedItem.name);
+
+            // Re-enable the "Add to Cart" button for the removed item
+            const button = document.getElementById(
+              `btn-product-${removedItem.productId}`
+            );
+            if (button) {
+              button.disabled = false;
+              button.textContent = "Add to Cart";
+            }
+          });
+
+          // Re-render the basket after removal
+          if (cartCount === 0) {
+            const basketPopup = document.getElementById("basket-popup");
+            const container = document.querySelector(".container");
+            basketPopup.style.display = "none";
+            container.classList.remove("blurred-background");
+          } else {
+            toggleBasket();
+          }
+        } else {
+          alert("Please select products to remove.");
+        }
+      }
+
+      // Function to remove item from the cart
+      function removeFromCart(name) {
+        // Find the removed item
+        const removedItem = cartItems.find((item) => item.name === name);
+
+        // Remove item from the cart
+        cartItems = cartItems.filter((item) => item.name !== name);
+        cartCount = cartItems.length;
+        document.getElementById("cart-count").textContent = cartCount;
+
+        // Also remove the item from the addedItems set
+        addedItems.delete(name);
+
+        // Re-enable the "Add to Cart" button for the removed item
+        const button = document.getElementById(
+          `btn-product-${removedItem.productId}`
+        );
+        if (button) {
+          button.disabled = false;
+          button.textContent = "Add to Cart";
+        }
+
+        // Close the basket after removal if the cart is empty
+        if (cartCount === 0) {
+          const basketPopup = document.getElementById("basket-popup");
+          const container = document.querySelector(".container");
+          basketPopup.style.display = "none";
+          container.classList.remove("blurred-background");
+        } else {
+          // If items are still in the cart, re-render the basket
+          toggleBasket();
+        }
+      }
+
+      // Function to close basket popup when close button is clicked
+      function closeBasket() {
+        const basketPopup = document.getElementById("basket-popup");
+        const container = document.querySelector(".container");
+        basketPopup.style.display = "none";
+        container.classList.remove("blurred-background");
+      }
+    </script>
+    <!-- CHECKOUT/JS -->
+    <script>
+      // Function to open checkout modal
+      function openCheckoutModal() {
+        let checkoutModal = document.getElementById("checkout-modal");
+        let checkoutItemsList = document.getElementById("checkout-items-list");
+        let totalPriceElem = document.getElementById("total-price");
+
+        checkoutItemsList.innerHTML = "";
+        let totalPrice = 0;
+        let selectedItems = [];
+
+        document
+          .querySelectorAll('input[type="checkbox"]:checked')
+          .forEach((checkbox) => {
+            let productId = checkbox.id.replace("checkbox-", ""); // Extract product ID
+            let item = cartItems.find(
+              (item) => item.productId.toString() === productId
+            );
+            if (item) selectedItems.push(item);
+          });
+
+        if (selectedItems.length === 0) {
+          alert("Please select at least one item to proceed to checkout.");
+          return;
+        }
+
+        selectedItems.forEach((item) => {
+          let itemElem = document.createElement("div");
+          itemElem.classList.add("checkout-item");
+          itemElem.innerHTML = `
+      <img src="${item.image}" alt="${
+            item.name
+          }" style="width: 50px; height: auto; border-radius: 5px;">
+      <span>${item.name} (x${item.quantity || 1})</span>
+      <strong>₱${(
+        parseFloat(item.price.replace(/₱|,/g, "")) * (item.quantity || 1)
+      ).toLocaleString()}</strong>
+    `;
+          checkoutItemsList.appendChild(itemElem);
+
+          let itemPrice =
+            parseFloat(item.price.replace(/₱|,/g, "")) * (item.quantity || 1);
+          totalPrice += itemPrice;
+        });
+
+        totalPriceElem.textContent = `₱${totalPrice.toLocaleString()}`;
+        checkoutModal.style.display = "block";
+      }
+
+      // Function to close checkout modal
+      function closeModal() {
+        document.getElementById("checkout-modal").style.display = "none";
+      }
+
+      // Function to confirm checkout (sample action)
+      function confirmCheckout() {
+        alert("Thank you for your purchase! 🎉");
+
+        // Clear cart data
+        cartItems = [];
+        addedItems.clear();
+        document.getElementById("cart-count").textContent = "0";
+        document.getElementById("basket-items").innerHTML = "";
+
+        // Close the modal
+        closeModal();
+
+        // Refresh the page after checkout
+        setTimeout(() => {
+          location.reload();
+        }, 500); // Small delay para hindi abrupt
+      }
+    </script>
+
+    <!-- Search/JS  -->
+    <script>
+      const searchIcon = document.getElementById("searchIcon");
+      const searchBox = document.getElementById("searchBox");
+
+      // Toggle Search Bar Visibility
+      searchIcon.addEventListener("click", function () {
+        searchBox.classList.toggle("active");
+      });
+
+      // Close search bar when clicking outside
+      document.addEventListener("click", function (event) {
+        if (!searchBox.contains(event.target) && event.target !== searchIcon) {
+          searchBox.classList.remove("active");
+        }
+      });
+
+      // Search Functionality
+      function filterProducts() {
+        const searchText = document
+          .getElementById("searchInput")
+          .value.toLowerCase();
+        const products = document.querySelectorAll(".card");
+
+        products.forEach((product) => {
+          const name = product.querySelector("h3").innerText.toLowerCase();
+          const description = product
+            .querySelector("p")
+            .innerText.toLowerCase();
+
+          if (name.includes(searchText) || description.includes(searchText)) {
+            product.style.display = "block";
+          } else {
+            product.style.display = "none";
+          }
+        });
+      }
+    </script>
+
+    <!-- Pagination/JS  -->
+    <script>
+      const cardsPerPage = 8; // Number of cards per page
+      let currentPage = 1;
+
+      function showPage(page) {
+        const cards = document.querySelectorAll(".card");
+        const totalPages = Math.ceil(cards.length / cardsPerPage);
+
+        // Hide all cards
+        cards.forEach((card) => (card.style.display = "none"));
+
+        // Show only the cards for the current page
+        const start = (page - 1) * cardsPerPage;
+        const end = start + cardsPerPage;
+        for (let i = start; i < end && i < cards.length; i++) {
+          cards[i].style.display = "block";
+        }
+
+        // Scroll to the top when changing pages
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth", // Smooth scrolling effect
+        });
+
+        // Update pagination controls
+        updatePaginationControls(totalPages);
+      }
+
+      function updatePaginationControls(totalPages) {
+        const paginationControls = document.getElementById(
+          "pagination-controls"
+        );
+        paginationControls.innerHTML = ""; // Clear existing buttons
+
+        for (let i = 1; i <= totalPages; i++) {
+          const button = document.createElement("button");
+          button.innerText = i;
+          button.classList.add("pagination-button");
+          button.onclick = () => {
+            currentPage = i;
+            showPage(currentPage);
+          };
+
+          if (i === currentPage) {
+            button.style.backgroundColor = "#ff6600";
+            button.style.color = "white";
+          }
+
+          paginationControls.appendChild(button);
+        }
+      }
+
+      // Call showPage() on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        showPage(currentPage);
+      });
+    </script>
+
+
+
+  </body>
+</html>
